@@ -1,0 +1,168 @@
+body{
+    background-color: #E5E5E5;
+}
+
+.main{
+    background-color: rgba(37,63,56,0.8);
+    margin: 2% 10%;
+    border-radius: 15px;
+}
+header{
+    padding: 1rem;
+    width: 90%;
+    margin: 0px 12px;
+    
+}
+.logo{
+    color: #807575;
+    font-family: "Zhi Mang Xing",monospace;
+    font-size: 34px;
+    float: left;
+}
+.titles{
+    padding-left: 55%;
+}
+.titles ul li{
+    display: inline;
+    text-decoration: none;
+    padding: 5px;
+    font-size: 20px;
+}
+.titles ul li a{
+    text-decoration: none;
+    color: white;
+}
+hr.bar{
+    border: 4px solid white;
+    margin: 0.2%;
+    border-radius: 10px;
+   
+}
+.content{
+    margin-left: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    display: flex;
+    
+}
+.left{
+    width: 80%;
+    padding: 2rem;
+}
+.left h1{
+    font-family:"Copperplate Gothic", monospace;
+    font-size: 25px;
+    text-transform: uppercase;
+}
+.left p{
+    font-family: "Times New Roman",monospace;
+    font-size: 14px;
+}
+#info{
+    font-size: 20px;
+    align-content: center;
+    font-family: "Red Hat Display";
+    padding: 5px 20px;
+    color: white;
+    position: relative;
+    left: 20%;
+}
+
+.fa{
+    padding: 0.2rem;
+    position: relative;
+    top: 11px;
+}
+.right img{
+    width: 230px;
+    height: 440px;
+    border: 8px solid #45598B ;
+    border-radius: 40%;
+    position: relative;
+    right: 20%;
+}
+.lside{
+    margin-right: 10%;
+    width: 30%;
+}
+.rsidepart{
+    width: 40%;
+}
+.titles1{
+    font-family: "Red Hat Display";
+    font-size: 22px;
+    color: white;
+    padding-left: 10%;
+}
+#mm{
+    margin-bottom: 10px;
+}
+#name1, #email1, #message{
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: "Red Hat Display";
+    padding: 4px;
+    margin: 5px;
+}
+#submit1{
+    margin: 5px 30%;
+    border: 1px solid white;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: "Red Hat Display";
+    padding: 5px 20px;
+    background-color: #082E2E;
+    color: white;
+}
+.lsidepart{
+    
+    font-size: 20px;
+    font-family: "Red Hat Display";
+    color: rgba(214, 219, 210, 0.836);
+    margin: 0% 2%;
+    width: 50%;
+    text-align: right;
+}
+.rside{
+    
+    font-size: 20px;
+    font-family: "Red Hat Display";
+    padding: 10px 20px;
+    color: white;
+    display: flex;
+}
+.leftp{
+    margin-left: 40%;
+}
+.who h1{
+  font-family: "Ribeye Marrow";  
+  color: E5E5E5;
+  text-align: center;
+  font-size: 30px;
+}
+.who p{
+    font-family: "Ribeye Marrow";  
+    color: #fff;
+    text-align: center; 
+    font-size: 16px;
+}
+.first{
+    width: 50%;
+    
+}
+.back{
+    position: relative;
+    bottom: 360px;
+    left: 50.4%;
+    z-index: 0;
+   
+    
+}
+.back img{
+    border-radius: 50%;
+}
+.space1{
+    font-size: 12px;
+}
