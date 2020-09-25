@@ -133,36 +133,136 @@ hr.bar{
     color: white;
     display: flex;
 }
+.rightp img{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    position: relative;
+    right: 20%;
+    bottom: 20px;
+    z-index: 1;
+    filter:brightness(0.4);
+}
 .leftp{
     margin-left: 40%;
 }
-.who h1{
-  font-family: "Ribeye Marrow";  
-  color: E5E5E5;
-  text-align: center;
-  font-size: 30px;
+.left1{
+    width: 40%;
+    z-index: 2;
 }
-.who p{
-    font-family: "Ribeye Marrow";  
-    color: #fff;
-    text-align: center; 
-    font-size: 16px;
+.left1 h1{
+    font-family: "Ribeye Marrow";
+    font-size: 25px;
+    color: aliceblue;
 }
-.first{
-    width: 50%;
-    
+.left1 p{
+    color: aliceblue;
+    font-family: "Ribeye Marrow";
+    font-size: 18px;
 }
-.back{
+.articles{
+    width: 40%;
+    background-color:rgba(40, 66, 84, 66%);
+    border-radius: 20px;
+    margin: 2%;
+    padding: 3%;
     position: relative;
-    bottom: 360px;
-    left: 50.4%;
-    z-index: 0;
-   
-    
+    right: 12%;
+    z-index: 4;
 }
-.back img{
-    border-radius: 50%;
+
+#message1{
+    border-bottom: 1px solid white;
+    border-radius: 10%;
+    font-size: 20px;
+    font-family: "Red Hat Display";
+    padding: 4px;
+    margin: 5px;
 }
-.space1{
-    font-size: 12px;
+.articles h1{
+    font-family: "Red Hat Display";
+    color: #B96363;
 }
+.articles p{
+    font-family: "Red Hat Display";
+}
+.articles h2{
+    font-family: "Red Hat Display";
+    color: #78BD20;
+}
+.open-button {
+    background-color: #555;
+    color: white;
+    padding: 4px 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    opacity: 0.8;
+    position: relative;
+    bottom: 20px;
+    left: 60px;
+    width: 60px;
+  }
+  .form-popup {
+    display: none;
+    position: fixed;
+    bottom: 30%;
+    right: 30%;
+    border: 3px solid #082E2E;
+    border-radius: 20px;
+    z-index: 9;
+  }
+  .form-container {
+    max-width: 300px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: white;
+  }
+  .form-container input[type=text], .form-container input[type=password] {
+    width: 70%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: rgba(218, 220, 221, 0.66);
+  }
+  .form-container .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 6px 8px;
+    margin-bottom:10px;
+    border: none;
+    opacity: 0.8;
+  }
+  .form-container .cancel {
+    background-color: rgb(252, 118, 9);
+    color: white;
+  }
+  .form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+  }
+  .comment{
+      background-color: white;
+      width: 40%;
+      border-radius: 10px;
+      margin: 0% 10% 2% 5%;
+  }
+  .comment h1{
+      color: teal;
+      font-size: 18px;
+      margin: 20px;
+  }
+  .comment p{
+      font-size: 16px;
+      margin: 20px;
+  }
+  .post{
+      color: floralwhite;
+  }
+  .post1{
+      color: red;
+  }
+  #subscr{
+      position: relative;
+      top: 13px;
+      left: 20px;
+  }
