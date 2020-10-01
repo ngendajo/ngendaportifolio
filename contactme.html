@@ -8,6 +8,7 @@
         <link href="https://fonts.googleapis.com/css?family=Zhi Mang Xing" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        
     </head>
     <body>
         <div class="main">
@@ -28,7 +29,7 @@
             </div>
             <div class="content">
                 <div class="lsidepart">
-                    <h1>Contact me</h1>
+                    <h1>Contact info</h1>
                     <p>Feel free to get in touch with me. I am ope to discussing
                         new projects, creative ideas or opportunities to be 
                         part of your visions.
@@ -43,11 +44,12 @@
                 </div>
                 <div class="rsidepart">
                     <label><strong class="titles1">Send your message here</strong> </label>
-                    <form>
+                    <form method="POST">
+                        <p id="name2"></p>
                         <input type="text" id="name1" name="name" placeholder="Enter your name here" required><br>
                         <input type="email" id="email1" name="email1" placeholder="Enter your Email here" required><br>
-                        <textarea id="message" name="message" style="height:100px;">Leave your comment here</textarea><br>
-                        <button type="button" name="submit" id="submit1">Send</button>
+                        <textarea id="message" name="message" style="height:100px;" required>Leave your comment here</textarea><br>
+                        <input type="submit" name="submit" id="submit1" value="Send">
                     </form>
                    <br> 
         

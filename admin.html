@@ -18,6 +18,7 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="contactme.html">Contact me</a></li>
                         <li><a href="profile.html">Profile</a></li>
+                        <li><button onclick="logout()">Logout</button></li>
                     </ul>
                 </div>
             </header>
@@ -54,5 +55,10 @@
                 
             </div>
         </div>
+        <script>
+            function logout(){
+            firebase.auth().signOut();
+            }
+        </script>
     </body>
 </html>

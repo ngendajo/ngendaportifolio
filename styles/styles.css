@@ -1,5 +1,6 @@
 body{
     background-color: #E5E5E5;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .main{
@@ -57,6 +58,7 @@ hr.bar{
 .left p{
     font-family: "Times New Roman",monospace;
     font-size: 14px;
+    color: #1C3D31;
 }
 #info{
     font-size: 20px;
@@ -203,43 +205,7 @@ hr.bar{
     left: 60px;
     width: 60px;
   }
-  .form-popup {
-    display: none;
-    position: fixed;
-    bottom: 30%;
-    right: 30%;
-    border: 3px solid #082E2E;
-    border-radius: 20px;
-    z-index: 9;
-  }
-  .form-container {
-    max-width: 300px;
-    padding: 10px;
-    border-radius: 20px;
-    background-color: white;
-  }
-  .form-container input[type=text], .form-container input[type=password] {
-    width: 70%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    border: none;
-    background: rgba(218, 220, 221, 0.66);
-  }
-  .form-container .btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 6px 8px;
-    margin-bottom:10px;
-    border: none;
-    opacity: 0.8;
-  }
-  .form-container .cancel {
-    background-color: rgb(252, 118, 9);
-    color: white;
-  }
-  .form-container .btn:hover, .open-button:hover {
-    opacity: 1;
-  }
+  
   .comment{
       background-color: white;
       width: 40%;
@@ -265,4 +231,49 @@ hr.bar{
       position: relative;
       top: 13px;
       left: 20px;
+  }
+  
+  .admin{
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 10;
+      position: absolute;
+      top: 0%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+  }
+  .admin-centents{
+      width: 500px;
+      height: 300px;
+      background-color: white;
+      border-radius: 4px;
+      
+  }
+  .admin-input{
+      width: 200px;
+      display: block;
+      margin: 15px auto;
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 4px;
+  }
+  .admin-btn{
+      margin-left: 35%;
+      padding: 5px 10px;
+      font-size: 18px;
+      cursor: pointer;
+  }
+  .admin-h{
+      color: white;
+  }
+  #close{
+    font-family: sans-serif;
+    color: red; 
+    position: relative;
+    left: 300px;
+    font-size: 32px;
+    cursor: pointer;
+    border-radius: 50%;
   }
