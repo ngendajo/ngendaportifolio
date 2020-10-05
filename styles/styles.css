@@ -108,7 +108,7 @@ hr.bar{
     padding: 4px;
     margin: 5px;
 }
-#submit1{
+#submit1,#submit2,#submit3{
     margin: 5px 30%;
     border: 1px solid white;
     border-radius: 10px;
@@ -208,24 +208,24 @@ hr.bar{
   
   .comment{
       background-color: white;
-      width: 40%;
+      width: 50%;
       border-radius: 10px;
       margin: 0% 10% 2% 5%;
   }
-  .comment h1{
+  #visitors{
       color: teal;
       font-size: 18px;
       margin: 20px;
   }
-  .comment p{
-      font-size: 16px;
-      margin: 20px;
-  }
+ 
   .post{
       color: floralwhite;
   }
   .post1{
       color: red;
+      position: relative;
+      top: 13px;
+      left: 5px;
   }
   #subscr{
       position: relative;
@@ -277,3 +277,44 @@ hr.bar{
     cursor: pointer;
     border-radius: 50%;
   }
+  #name2,#message2{
+    width: 80%;
+    border: 1px solid white;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: "Red Hat Display";
+    padding: 4px;
+    margin-bottom: 4px;
+  }
+  input,button{
+    font-family: sans-serif;
+}
+.main-div{
+    width: 20%;
+    margin: 0px auto;
+    padding: 20px;
+   
+}
+.main-div input{
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    outline: none;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.main-div button{
+    background: #5d8ffc;
+    color: #fff;
+    border: 0px;
+    border-radius: 5px;
+    padding: 15px;
+    display: block;
+    width: 100%; 
+}
+.admin_view{
+ display: flex;
+}
+
+  

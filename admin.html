@@ -18,7 +18,6 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="contactme.html">Contact me</a></li>
                         <li><a href="profile.html">Profile</a></li>
-                        <li><button onclick="logout()">Logout</button></li>
                     </ul>
                 </div>
             </header>
@@ -26,39 +25,153 @@
                 <hr class="bar">
             </div>
             <div class="content">
-                <div class="comment">
-                    <h1>Name</h1>
-                    <h1>Email</h1>
-                    <p>Comments</p>
-                    <h1>Name</h1>
-                    <h1>Email</h1>
-                    <p>Comments</p>
-                    <h1>Name</h1>
-                    <h1>Email</h1>
-                    <p>Comments</p>
-                </div>  
-                <div>
-                    <div>
-                        <h1>X <span class="post">Likes</span></h1>
-                        <h1>X <span class="post1">Subscribes</span></h1>
-                    </div>
-                    <div>
-                        <h1>Add and updated article</h1>
-                        <form>
-                            <input id="name1" type="text" name="arttitle" placeholder="Enter the Title" required><br>
-                            <textarea name="details" id="message">Enter Details</textarea>
-                           <center> <input type="button" name="title1" value="Post"></center>
-
-                        </form>
-                    </div>
-                </div>                
+                <div id="login_div" class="main-div">
+                    <h3>Admin Login</h3>
+                    <input type="email" placeholder="Email..." id="email_field"/>
+                    <input type="password" placeholder="password..." id="password_field"/>
+                    <button onclick="login()">Login</button>
+                </div>
+                <div id="user_div">
+                    <div class="admin_view">
+                        <div class="comment" >
+                            <div id="visitors">
+        
+                            </div>
+                            
+                        </div>  
+                        <div>
+                            <div>
+                                <h1><i id="likes">0 </i><span class="post"> Likes</span></h1>
+                                <h1><i id="subscr">0 </i> <span class="post1">Subscribes</span></h1>
+                            </div>
+                            <div>
+                                <h1>Add and updated article</h1>
+                                <form>
+                                    <input id="name2" type="text" name="arttitle" placeholder="Enter the Title" required><br>
+                                    <textarea name="details" id="message2" placeholder="Enter Details" required></textarea>
+                                   <center> <input type="button" name="title1" value="Post" id="submit2">
+                                    <input type="button" name="title1" onclick="logout()" value="Logout" id="submit3">
+                                </center>
+        
+                                </form>
+                            </div>
+                        </div> 
+                    </div> 
+                </div>              
                 
             </div>
         </div>
-        <script>
-            function logout(){
-            firebase.auth().signOut();
-            }
+        <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
+        <script id="mainScript">
+             var firebaseConfig = {
+                apiKey: "AIzaSyD1QVFIIVtj0F-ZaRVU2O0WPE2YvxrsIjU",
+                authDomain: "ngenda-bfdfa.firebaseapp.com",
+                databaseURL: "https://ngenda-bfdfa.firebaseio.com",
+                projectId: "ngenda-bfdfa",
+                storageBucket: "ngenda-bfdfa.appspot.com",
+                messagingSenderId: "188708309095",
+                appId: "1:188708309095:web:353bdc3955408c84762cc2"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+           
+            //......................selection process............................
+
+                
+                    database=firebase.database();     
+                var ref=database.ref('visitors');
+                ref.on('value',gotData,errData);
+                
+
+                function gotData(data)
+                {
+                   var visits=data.val();
+                   var keys=Object.keys(visits);
+                   document.getElementById('visitors').innerHTML='';
+                   for(var i=0;i<keys.length;i++)
+                   {
+                       var k=keys[i];
+                       var names=visits[k].Names;
+                       var emailv=visits[k].emailv;
+                       var datev=visits[k].datev;
+                       var commentv=visits[k].commentv;
+                       //console.log(names,emailv,datev,commentv);
+                       document.getElementById('visitors').innerHTML+='<h3>'+names+' '+emailv+'</h3><p>'+commentv+'</p>'+'<h4>'+datev+'</h4>';
+                   }
+                }
+                function errData(err)
+                {
+                    window.alert('error! '+err);
+                }
+
+
+                var refs=database.ref('likes');
+                refs.on('value',gotData1,errData1);
+                
+
+                function gotData1(data)
+                {
+                   var visits=data.val();
+                   var keys=Object.keys(visits);
+                   var likes1=0;
+                   for(var i=0;i<keys.length;i++)
+                   {
+                       var k=keys[i];
+                      var likes=visits[k].datev;
+                       likes1+=1;
+                       console.log(likes,likes1);
+                       
+                       }
+                       document.getElementById('likes').innerHTML=likes1+" ";
+
+                }
+                function errData1(err)
+                {
+                    window.alert('error! '+err);
+                }
+
+                var refs1=database.ref('subscr');
+                refs1.on('value',gotData2,errData2);
+                
+
+                function gotData2(data)
+                {
+                   var visits=data.val();
+                   var keys=Object.keys(visits);
+                   var subscr=0;
+                   for(var i=0;i<keys.length;i++)
+                   {
+                       var k=keys[i];
+                      var likes=visits[k].datev;
+                       subscr+=1;
+                       console.log(likes,subscr);
+                       
+                       }
+                       document.getElementById('subscr').innerHTML=subscr+" ";
+
+                }
+                function errData2(err)
+                {
+                    window.alert('error! '+err);
+                }
+            //............................update data............
+           /* document.getElementById("update").onclick=function(){
+                Ready();
+                firebase.database().ref('student/'+rollv).update({
+                    NameOfStudent: namev,
+                    Section: secv,
+                    Gender: genv
+                });
+            }*/
+            //............................delete data............
+           /* document.getElementById("delete").onclick=function(){
+                Ready();
+                firebase.database().ref('student/'+rollv).remove();
+            }*/
+            
         </script>
+        <script src="index.js"></script>
     </body>
 </html>

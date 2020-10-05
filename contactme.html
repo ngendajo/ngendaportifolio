@@ -42,24 +42,114 @@
                     <label id="mm">+250 784 921 483</label>
                         
                 </div>
-                <div class="rsidepart">
+                <div class="rsidepart" id="user_para">
                     <label><strong class="titles1">Send your message here</strong> </label>
-                    <form method="POST">
-                        <p id="name2"></p>
+                    
+                        
                         <input type="text" id="name1" name="name" placeholder="Enter your name here" required><br>
                         <input type="email" id="email1" name="email1" placeholder="Enter your Email here" required><br>
-                        <textarea id="message" name="message" style="height:100px;" required>Leave your comment here</textarea><br>
-                        <input type="submit" name="submit" id="submit1" value="Send">
-                    </form>
+                        <textarea id="message" name="message" style="height:100px;" required placeholder="Leave your comment here"></textarea><br>
+                        <input type="submit" name="submit" id="submit1"  value="Send">
+                    
                    <br> 
         
-                   <center> <a id="like" href="#"><i class="fa fa-thumbs-up" style="font-size:36px"></i></a>
-                    <a id="subscr" href="#"><i class="material-icons" style="font-size:36px">subscriptions</i></a>
+                   <center> <a onclick="like()" id="like" href="#"><i class="fa fa-thumbs-up" style="font-size:36px"></i></a>
+                    <a onclick="subscr()" id="subscr" href="#"><i class="material-icons" style="font-size:36px">subscriptions</i></a>
                 </center>
                 </div>
                 
 
             </div>
         </div>
+        <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
+        <script id="mainScript">
+             var firebaseConfig = {
+                apiKey: "AIzaSyD1QVFIIVtj0F-ZaRVU2O0WPE2YvxrsIjU",
+                authDomain: "ngenda-bfdfa.firebaseapp.com",
+                databaseURL: "https://ngenda-bfdfa.firebaseio.com",
+                projectId: "ngenda-bfdfa",
+                storageBucket: "ngenda-bfdfa.appspot.com",
+                messagingSenderId: "188708309095",
+                appId: "1:188708309095:web:353bdc3955408c84762cc2"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+            
+            //..................read data...........................
+            var namev,emailv,commentv,idv,datev1,datev2,datev3,datev4,datev5,datev6,datev7;
+            var d = new Date();
+            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            function Ready(){
+                namev=document.getElementById("name1").value;
+                emailv=document.getElementById("email1").value;
+                commentv=document.getElementById("message").value;
+                idv=emailv.replace(/[^a-zA-Z ]/g, "")+d.getTime(); 
+                idl=d.getTime(); 
+                datev1=d.getFullYear();
+                datev2=months[d.getMonth()];
+                datev3=d.getDate();
+                datev4=d.getHours();
+                datev5=d.getMinutes();
+                datev6=d.getSeconds();
+                datev7=datev1+" "+datev2+" "+datev3+" "+datev4+":"+datev5+":"+datev6;
+
+               
+
+            }
+            //.................insert data..........................
+            document.getElementById("submit1").onclick=function(){
+                Ready();
+                firebase.database().ref('visitors/'+idv).set({
+                    Names: namev,
+                    emailv: emailv,
+                    commentv: commentv,
+                    datev:datev7
+                });
+                document.getElementById("user_para").innerHTML="<center style='color:white;''><h1>Welcome "+namev+"</h1><p>I appreciate your taking the time to write.</p></center>";
+            }
+            
+            //......................selection process............................
+            
+                firebase.database().ref('visitors').on('value',(data)=>{
+                    let visitors=data.val();
+                    for(visitor in visitors)
+                    {
+
+                    }
+                });
+                function like()
+                {
+                    Ready();
+                    firebase.database().ref('likes/'+idl).set({
+                    datev:datev7
+                }); 
+                window.alert("Thank you for your like"); 
+                }
+                function subscr()
+                {
+                    Ready();
+                    firebase.database().ref('subscr/'+idl).set({
+                    datev:datev7
+                }); 
+                window.alert("Thank you for your subscription"); 
+                }
+            //............................update data............
+           /* document.getElementById("update").onclick=function(){
+                Ready();
+                firebase.database().ref('student/'+rollv).update({
+                    NameOfStudent: namev,
+                    Section: secv,
+                    Gender: genv
+                });
+            }*/
+            //............................delete data............
+           /* document.getElementById("delete").onclick=function(){
+                Ready();
+                firebase.database().ref('student/'+rollv).remove();
+            }*/
+        </script>
+       
     </body>
 </html>
