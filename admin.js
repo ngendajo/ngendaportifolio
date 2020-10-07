@@ -33,10 +33,5 @@ function login()
 function logout(){
   firebase.auth().signOut();
 }
-document.getElementById("admin_button").addEventListener('click',function(){
-    document.querySelector('.admin').style.display='flex';
-});
-function adminClose(){
-    document.querySelector('.admin').style.display='none';
-}
+
          

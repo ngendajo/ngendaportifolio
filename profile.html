@@ -41,15 +41,13 @@
                 <div class="rightp">
                     <img src="images/family.jpg"alt="My Pucture">
                 </div>
-                <div class="articles">
-                   <h1>Who is a software engineer?</h1>
-                   <p>A software engineer is a person who applies  the principles of software engineering to the design,  development, maintenance, testing, and evaluation of computer software.</p>
-                   <h2>Leave your comment here</h2>
-               <center> <form>
-                       <textarea id="message1" name="message1">Leave your comment here</textarea>
-                       <button type="button" name="submit2" id="submit1">Submit</button>
-                   </form></center>
+                <div>
+                    <div class="articles" id="article1">
+                   
+                    </div>
+                    <h2>Leave your comment here<h2><textarea id='message1' name='message1' placeholder='Leave your comment here'></textarea><button type='button' +onclick='comment()' name='submit2' id='submit1'>Submit</button>
                 </div>
+                
                 
             </div>
         </div>
@@ -68,20 +66,82 @@
          <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
 
                 <script>
-                // Your web app's Firebase configuration
-                // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-                var firebaseConfig = {
-                    apiKey: "AIzaSyDPc-ia9DczlgsyvfXJCh2I1TWR7JPJFIE",
-                    authDomain: "josephdb.firebaseapp.com",
-                    databaseURL: "https://josephdb.firebaseio.com",
-                    projectId: "josephdb",
-                    storageBucket: "josephdb.appspot.com",
-                    messagingSenderId: "905257617135",
-                    appId: "1:905257617135:web:143df3414029e739a2fd1a",
-                    measurementId: "G-K6FMTKS9EZ"
-                };
-                // Initialize Firebase
-                firebase.initializeApp(firebaseConfig);
+               // Your web app's Firebase configuration
+                    var firebaseConfig = {
+                        apiKey: "AIzaSyD1QVFIIVtj0F-ZaRVU2O0WPE2YvxrsIjU",
+                        authDomain: "ngenda-bfdfa.firebaseapp.com",
+                        databaseURL: "https://ngenda-bfdfa.firebaseio.com",
+                        projectId: "ngenda-bfdfa",
+                        storageBucket: "ngenda-bfdfa.appspot.com",
+                        messagingSenderId: "188708309095",
+                        appId: "1:188708309095:web:353bdc3955408c84762cc2"
+                    };
+                    // Initialize Firebase
+                    firebase.initializeApp(firebaseConfig);
+                
+                 //......................selection process............................
+
+                
+                 database=firebase.database();     
+                var ref=database.ref('articles');
+                ref.on('value',gotData,errData);
+                
+
+                function gotData(data)
+                {
+                   var visits=data.val();
+                   var keys=Object.keys(visits);
+                   document.getElementById('article1').innerHTML='';
+                   var a=0;
+                   for(var i=0;i<keys.length;i++)
+                   {
+                       var k=keys[i];
+                       var title1=visits[k].Names;
+                       var sign=visits[k].sign;
+                       var datev=visits[k].datev;
+                       var commentv=visits[k].commentv;
+                       a+=1;
+                       //console.log(names,emailv,datev,commentv);
+                       if(sign==1)
+                       {
+                        document.getElementById('article1').innerHTML+="<center><h1 id='tit'>"+title1+"</h1><p>"+commentv+"</p>"+"<h4>"+datev+"</h4>";
+                       }
+                       else{
+                          document.getElementById('article1').innerHTML+="<p>"+commentv+"<p><h4>"+datev+"</h4>";
+                       }
+                   }
+                   
+                }
+                function errData(err)
+                {
+                    window.alert('error! '+err);
+                }
+                var commentt,idv,datev1,datev2,datev3,datev4,datev5,datev6,datev7;
+            var d = new Date();
+            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            function Ready(){
+                
+                commentt=document.getElementById("message1").value;
+                idv=d.getTime(); 
+                datev1=d.getFullYear();
+                datev2=months[d.getMonth()];
+                datev3=d.getDate();
+                datev4=d.getHours();
+                datev5=d.getMinutes();
+                datev6=d.getSeconds();
+                datev7=datev1+" "+datev2+" "+datev3+" "+datev4+":"+datev5+":"+datev6;
+            }
+                
+                document.getElementById('submit1').onclick=function(){
+                    Ready();
+                    firebase.database().ref('articles/'+idv).set({
+                    Names: 'visitor',
+                    sign: 2,
+                    commentv: commentt,
+                    datev:datev7
+                });
+                }
+                
                 </script>
         <script src="admin.js"></script>
     </body>
