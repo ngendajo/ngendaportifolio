@@ -35,36 +35,39 @@ function logout(){
 var namev,commentv,idv,datev1,datev2,datev3,datev4,datev5,datev6,datev7;
 var d = new Date();
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-function Ready(){
-    namev=document.getElementById("name2").value;
-    commentv=document.getElementById("message2").value;
-    idv=d.getTime(); 
-    idl=d.getTime(); 
-    datev1=d.getFullYear();
-    datev2=months[d.getMonth()];
-    datev3=d.getDate();
-    datev4=d.getHours();
-    datev5=d.getMinutes();
-    datev6=d.getSeconds();
-    datev7=datev1+" "+datev2+" "+datev3+" "+datev4+":"+datev5+":"+datev6;
 
-}
 //.................insert data..........................
+CKEDITOR.replace('message2');
 
-
-document.getElementById('submit2').onclick=function(){
-  Ready();
-  if(namev==''|| commentv=='')
-  {
-    window.alert("Insert title and details");
-  }
-  else{
-    firebase.database().ref('articles/'+idv).set({
-      Names: namev,
-      sign: 1,
-      commentv: commentv,
-      datev:datev7
-  });
-    window.alert("New update done!");
-  }
-}
+const adminform=document.getElementById('adform');
+const errorMessage=document.getElementById('error');
+adminform.addEventListener('submit',async(e)=>{
+  e.preventDefault();
+  console.log('clicked');
+            
+      try{
+        var str=CKEDITOR.instances.message2.getData()
+        let fd = {
+          'title': adminform.arttitle.value,
+          'content':str
+        };
+        
+        const options={
+        method:'POST',
+        headers:{
+          'Content-Type': 'application/json;charset=utf-8' 
+        },
+        body:JSON.stringify(fd)
+      };
+        const r=await fetch('http://localhost:3000/post',options);
+        const p = await r.json();
+                console.log(p);
+      
+                adminform.reset();
+                errorMessage.innerHTML = 'Success';
+                location.href = 'profile.html';
+      }
+      catch (error) {
+        console.log(error);
+      }
+        })

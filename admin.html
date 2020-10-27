@@ -45,11 +45,12 @@
                                 <h1><i id="subscr">0 </i> <span class="post1">Subscribes</span></h1>
                             </div>
                             <div>
-                                <h1>Add and updated article</h1>
-                                <form>
+                                <h1>Add updated article</h1>
+                                <p id="error" style="color: red;"></p>
+                                <form id="adform" method="POST" autocomplete="off">
                                     <input id="name2" type="text" name="arttitle" placeholder="Enter the Title" required><br>
                                     <textarea name="details" id="message2" placeholder="Enter Details" required></textarea>
-                                   <center> <input type="button" name="title1" value="Post" id="submit2">
+                                   <center> <input type="submit" name="title1" value="Post" id="submit2">
                                     <input type="button" name="title1" onclick="logout()" value="Logout" id="submit3">
                                 </center>
         
@@ -174,6 +175,7 @@
             }*/
             
         </script>
-        <script src="index.js"></script>
+        <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
+        <script defer src="index.js"></script>
     </body>
 </html>
