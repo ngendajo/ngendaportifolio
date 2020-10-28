@@ -29,9 +29,12 @@ header{
     padding: 5px;
     font-size: 20px;
 }
-.titles ul li a{
+.titles ul li a, .arti, .left-blog-card a{
     text-decoration: none;
     color: white;
+}
+.left-blog-card{
+    padding-right: 1%;
 }
 hr.bar{
     border: 4px solid white;
@@ -45,6 +48,15 @@ hr.bar{
     margin-bottom: 2%;
     display: flex;
     
+}
+.content1{
+    margin-left: 2%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    
+}
+.profile{
+    display: flex;
 }
 .left{
     width: 80%;
@@ -149,7 +161,7 @@ hr.bar{
     margin-left: 40%;
 }
 .left1{
-    width: 40%;
+    width: 70%;
     z-index: 2;
 }
 .left1 h1{
@@ -164,13 +176,10 @@ hr.bar{
 }
 .articles{
     width: 100%;
-    background-color:rgba(40, 66, 84, 66%);
-    border-radius: 20px;
-    margin: 2%;
-    padding: 3%;
-    position: relative;
-    right: 12%;
-    z-index: 4;
+    margin: 0% 2% 2% 2%;
+    padding: 0% 2%  2% 3%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 #message1{
@@ -191,6 +200,10 @@ hr.bar{
 .articles h2{
     font-family: "Red Hat Display";
     color: #78BD20;
+}
+.right3{
+    position: relative;
+    top: 11px;
 }
 .open-button {
     background-color: #555;

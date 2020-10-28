@@ -27,122 +27,87 @@
             <div>
                 <hr class="bar">
             </div>
-            <div class="content">
+            <div class="content1">
                 
-                <div class="left1">
-                    <h1>Who is Ngendahimana Joseph?</h1>
-                    <p>Joseph holds a bachelor’s degree in computer science and has been a teacher of computer for the last 5 years.</p>
-                    <p>He is also skilled in graphic design, web design. and is certified in SQL, JAVA, and Python.</p>
-                    <p> 
-                        He is maried with Alice Uwase and we have one kid, Moise Ngendahimana.
-                    </p>
+                <div class="profile">
+                    <div class="left1">
+                        <h1>Who is Ngendahimana Joseph?</h1>
+                        <p>Joseph holds a bachelor’s degree in computer science and has been a teacher of computer for the last 5 years.</p>
+                        <p>He is also skilled in graphic design, web design. and is certified in SQL, JAVA, and Python. He has been using these skills 
+                            by designing different web applications like students report management system at Gitisi Secondary School and library management system ast 
+                            Agahozo Shalom Youth Village.
+                        </p>
+                        <p> 
+                            He is maried with Alice Uwase and we have one kid, Moise Ngendahimana.
+                        </p>
+                    </div>
+                                          
+                    <div class="rightp">
+                        <img src="images/family.jpg"alt="My Pucture">
+                    </div>
                 </div>
-                                      
-                <div class="rightp">
-                    <img src="images/family.jpg"alt="My Pucture">
-                </div>
-                <div>
+                
+                    <cencter><h1 class="arti">Interesting articles </h1></cencter>
                     <div class="articles" id="article1">
                    
                     </div>
-                    <h2>Leave your comment here<h2><textarea id='message1' name='message1' placeholder='Leave your comment here'></textarea><button type='button' +onclick='comment()' name='submit2' id='submit1'>Submit</button>
-                </div>
+                    
+                
                 
                 
             </div>
         </div>
-        <div class="admin" id="login_div">
-            <div class="admin-contents">
-                <button id="close" onclick="adminClose()"><b>X</b></button></button>
-                <h1 class="admin-h">Admin Sign in</h1>
-                <input class="admin-input" type="email" id="email_field" placeholder="Email...." required>
-                <input class="admin-input" type="password" placeholder="Password....." id="password_field" required>
-                <input onclick="login()" class="admin-btn" type="button" value="Log in">
-
-            </div>
-        </div>
-        <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-app.js"></script>
-         <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-auth.js"></script>
-         <script src="https://www.gstatic.com/firebasejs/7.21.1/firebase-database.js"></script>
-
-                <script>
-               // Your web app's Firebase configuration
-                    var firebaseConfig = {
-                        apiKey: "AIzaSyD1QVFIIVtj0F-ZaRVU2O0WPE2YvxrsIjU",
-                        authDomain: "ngenda-bfdfa.firebaseapp.com",
-                        databaseURL: "https://ngenda-bfdfa.firebaseio.com",
-                        projectId: "ngenda-bfdfa",
-                        storageBucket: "ngenda-bfdfa.appspot.com",
-                        messagingSenderId: "188708309095",
-                        appId: "1:188708309095:web:353bdc3955408c84762cc2"
-                    };
-                    // Initialize Firebase
-                    firebase.initializeApp(firebaseConfig);
-                
-                 //......................selection process............................
-
-                
-                 database=firebase.database();     
-                var ref=database.ref('articles');
-                ref.on('value',gotData,errData);
-                
-
-                function gotData(data)
-                {
-                   var visits=data.val();
-                   var keys=Object.keys(visits);
-                   document.getElementById('article1').innerHTML='';
-                   var a=0;
-                   for(var i=0;i<keys.length;i++)
-                   {
-                       var k=keys[i];
-                       var title1=visits[k].Names;
-                       var sign=visits[k].sign;
-                       var datev=visits[k].datev;
-                       var commentv=visits[k].commentv;
-                       a+=1;
-                       //console.log(names,emailv,datev,commentv);
-                       if(sign==1)
-                       {
-                        document.getElementById('article1').innerHTML+="<center><h1 id='tit'>"+title1+"</h1><p>"+commentv+"</p>"+"<h4>"+datev+"</h4>";
-                       }
-                       else{
-                          document.getElementById('article1').innerHTML+="<p>"+commentv+"<p><h4>"+datev+"</h4>";
-                       }
-                   }
-                   
-                }
-                function errData(err)
-                {
-                    window.alert('error! '+err);
-                }
-                var commentt,idv,datev1,datev2,datev3,datev4,datev5,datev6,datev7;
-            var d = new Date();
-            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            function Ready(){
-                
-                commentt=document.getElementById("message1").value;
-                idv=d.getTime(); 
-                datev1=d.getFullYear();
-                datev2=months[d.getMonth()];
-                datev3=d.getDate();
-                datev4=d.getHours();
-                datev5=d.getMinutes();
-                datev6=d.getSeconds();
-                datev7=datev1+" "+datev2+" "+datev3+" "+datev4+":"+datev5+":"+datev6;
-            }
-                
-                document.getElementById('submit1').onclick=function(){
-                    Ready();
-                    firebase.database().ref('articles/'+idv).set({
-                    Names: 'visitor',
-                    sign: 2,
-                    commentv: commentt,
-                    datev:datev7
-                });
-                }
-                
-                </script>
+       
+        <script>
+            const postsContainer = document.querySelector('.articles');
+            (async () => {
+        try {
+          const res = await fetch(
+            'http://localhost:3000/posts',
+            {
+              method: 'GET',
+              headers: { 'content-Type': 'application/json' },
+            },
+          );
+          const fetchedPosts = await res.json();
+          const posts = fetchedPosts.data;
+          console.log('posts:', posts);
+          let html = '';
+          await posts.forEach((post) => {
+            console.log(post);
+            html += ` <div class="post-card">
+         <div class="left-blog-card">
+           <a href="readpost.html?id=${
+             post._id
+           }"><h3 class="post-title">
+         ${post.title.slice(0,20)} ... <u style="color:blue">Click here</u>
+         </h3></a>
+          
+           <div class="bottom-icons">
+             <p class="time"><em>Posted at ${post.createdAt}</em></p>
+             <p class="each-icon">
+               <i class="fa fa-commenting-o" aria-hidden="true"></i
+               ><span class="right3"> ${post.commentsCount} comments</span>
+             </p>
+             <p class="each-icon">
+               <i class="fa fa-eye" aria-hidden="true"></i>
+               <span class="right3"> ${post.views} views</span>
+             </p>
+             <p class="each-icon">
+               <i class="fa fa-heart" aria-hidden="true"></i>
+               <span class="right3"> ${post.likes} likes</span>
+             </p>
+           </div>
+         </div>
+       </div>`;
+          });
+          
+          postsContainer.innerHTML = html;
+        } catch (error) {
+          console.log(error);
+        }
+      })();
+        </script>
         <script src="admin.js"></script>
     </body>
 </html>
