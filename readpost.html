@@ -32,11 +32,10 @@
 
                 </div>
                 <div class="comments-container" style="padding-bottom: 3%;margin: auto;">
-                    <form action="" method="POST" autocomplete="off">
-                        <textarea id="message" name="message" style="height:40px;width: 90%;" required placeholder="Leave your comment here"></textarea>
-                        <input type="submit" name="submit" id="submit1"  value="Send">
-                        
-                    </form>
+                    
+                        <textarea id="message" class="comment-input" name="message" style="height:40px;width: 90%;" required placeholder="Leave your comment here"></textarea>
+                        <input type="submit" name="submit" id="submit1" onclick="addComment()" value="Send">
+                    
                     <a href="profile.html" id="submit1" style="text-decoration: none; margin-top: 1%;">Back to the list</a>
                     <a id="like" style="color: darkcyan; text-decoration: none;" href="#"><strong class="like"style="position:relative;top:8px;"></strong> 
                         <i class="fa fa-thumbs-up" style="font-size:36px"></i></a>
@@ -47,6 +46,7 @@
         </div>
        
         <script>
+            //Read one post
            const postRead = document.querySelector('.post-read');
       const commentsContainer = document.querySelector('.comments-container');
       const subscribe = document.querySelector('.sub-btn');
@@ -74,6 +74,35 @@
         document.querySelector('.like').textContent = post.likes;
         postRead.innerHTML = html;
       })();
+      //Add comment
+      var datev1,datev2,datev3,datev4,datev5,datev6,datev7;
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            var d = new Date();
+                datev1=d.getFullYear();
+                datev2=months[d.getMonth()];
+                datev3=d.getDate();
+                datev4=d.getHours();
+                datev5=d.getMinutes();
+                datev6=d.getSeconds();
+                datev7=datev1+" "+datev2+" "+datev3+" "+datev4+":"+datev5+":"+datev6;
+                function addComment() {
+        const comment = document.querySelector('.comment-input');
+        comment.value.length > 0 &&
+          (async () => {
+            await fetch(
+              `http://localhost:3000/comments/${postId}/comment`,
+              {
+                method: 'post',
+                headers: { 'content-Type': 'application/json' },
+                body: JSON.stringify({
+                  comment: comment.value,
+                  createdAt: datev7,
+                }),
+              },
+            );
+            await location.reload();
+          })();
+        }
         </script>
         <script src="admin.js"></script>
     </body>
