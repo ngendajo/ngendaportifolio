@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Engineer Ngendahimana Joseph</title>
+        <link rel="stylesheet" href="styles/styles.css">
+        <link href="https://fonts.googleapis.com/css?family=Zhi Mang Xing" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+    </head>
+    <body>
+        <div class="main">
+            <header>
+                <div class="logo">
+                    Engineer Ngendahimana Joseph
+                </div>
+                <div class="titles">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="contactme.html">Contact me</a></li>
+                        <li><a href="profile.html">Profile</a></li>
+                        <li><a href="admin.html">Admin</a></li>
+                    </ul>
+                   
+                </div>
+            </header>
+            <div>
+                <hr class="bar">
+            </div>
+            <div class="content1">
+                <div class="post-read">
+
+                </div>
+                <div class="comments-container" style="padding-bottom: 3%;margin: auto;">
+                    <form action="" method="POST" autocomplete="off">
+                        <textarea id="message" name="message" style="height:40px;width: 90%;" required placeholder="Leave your comment here"></textarea>
+                        <input type="submit" name="submit" id="submit1"  value="Send">
+                        
+                    </form>
+                    <a href="profile.html" id="submit1" style="text-decoration: none; margin-top: 1%;">Back to the list</a>
+                    <a id="like" style="color: darkcyan; text-decoration: none;" href="#"><strong class="like"style="position:relative;top:8px;"></strong> 
+                        <i class="fa fa-thumbs-up" style="font-size:36px"></i></a>
+                </div>
+                
+                
+            </div>
+        </div>
+       
+        <script>
+           const postRead = document.querySelector('.post-read');
+      const commentsContainer = document.querySelector('.comments-container');
+      const subscribe = document.querySelector('.sub-btn');
+      const subInput = document.querySelector('.email-input');
+      const postId = location.href.split('?id=')[1];
+
+      (async () => {
+        const res = await fetch(
+          `http://localhost:3000/post1/${postId}`,
+        );
+        const postData = await res.json();
+        const post = postData.data;
+        post.views += 1;
+
+        let html = `
+                <h2 class="title onRead-title">
+                  ${post.title}
+                </h2>
+                <div class="onRead-post">
+                  <p>
+                    ${post.content}
+                  </p>
+                </div>
+                `;
+        document.querySelector('.like').textContent = post.likes;
+        postRead.innerHTML = html;
+      })();
+        </script>
+        <script src="admin.js"></script>
+    </body>
+</html>
