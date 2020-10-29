@@ -24,7 +24,7 @@
             <div>
                 <hr class="bar">
             </div>
-            <div class="content">
+            <div class="content1">
                 <div id="login_div" class="main-div">
                     <h3>Admin Login</h3>
                     <input type="email" placeholder="Email..." id="email_field"/>
@@ -33,6 +33,13 @@
                 </div>
                 <div id="user_div">
                     <div class="admin_view">
+                        <cencter><h1 class="arti">My articles </h1></cencter>
+                        <div class="articles"></div>
+                        <div id="actions">
+                            <input type="submit" value="View comments" id="comm" class="p">
+             <input type="submit" value="Update Post" id="up" class="p">
+             <input type="submit" value="Delete Post" id="del" class="p">
+                        </div>
                         <div class="comment" >
                             <div id="visitors">
         
@@ -40,12 +47,9 @@
                             
                         </div>  
                         <div>
+                           
                             <div>
-                                <h1><i id="likes">0 </i><span class="post"> Likes</span></h1>
-                                <h1><i id="subscr">0 </i> <span class="post1">Subscribes</span></h1>
-                            </div>
-                            <div>
-                                <h1>Add updated article</h1>
+                                <h1>Add update article</h1>
                                 <p id="error" style="color: red;"></p>
                                 <form id="adform" method="POST" autocomplete="off">
                                     <input id="name2" type="text" name="arttitle" placeholder="Enter the Title" required><br>
@@ -90,7 +94,7 @@
                 {
                    var visits=data.val();
                    var keys=Object.keys(visits);
-                   document.getElementById('visitors').innerHTML='';
+                   document.getElementById('visitors').innerHTML='<h1>Messages from visitors';
                    for(var i=0;i<keys.length;i++)
                    {
                        var k=keys[i];
@@ -106,74 +110,65 @@
                 {
                     window.alert('error! '+err);
                 }
-
-
-                var refs=database.ref('likes');
-                refs.on('value',gotData1,errData1);
+                //get my posts and their comments
+                const postsContainer = document.querySelector('.articles');
                 
+            (async () => {
+        try {
+          const res = await fetch(
+            'http://localhost:3000/posts',
+            {
+              method: 'GET',
+              headers: { 'content-Type': 'application/json' },
+            },
+          );
+          const fetchedPosts = await res.json();
+          const posts = fetchedPosts.data;
+          console.log('posts:', posts.length);
+          let html = '';
+          var j=posts.length;
+          var i=0;
+          await posts.forEach((post) => {
+            console.log(post);
+            html += ` <div class="post-card">
+         <div class="left-blog-card">
+           <a href="readpost.html?id=${
+             post._id
+           }"><h3 class="post-title">
+         ${post.title}</h3></a>
+          
+           <div class="bottom-icons">
+             <p class="time"><em>Posted at ${post.createdAt}</em></p>
+             <p class="time1"><em>${post.content}</em></p>
+             <p class="each-icon">
+               <i class="fa fa-commenting-o" aria-hidden="true"></i
+               ><span class="right3"> ${post.commentsCount} comments</span>
+               <i class="fa fa-eye" aria-hidden="true"></i>
+               <span class="right3"> ${post.views} views</span>
+               <i class="fa fa-heart" aria-hidden="true"></i>
+               <span class="right3"> ${post.likes} likes</span>
+             </p>
+             
+         <a href="deletepost.html?id=${
+             post._id
+           }"><h3 class="p">
+         Delete Post</h3></a>
+             
+           </div>
+           <div class="comments-container"></div>
+         </div>
+       </div>`;
 
-                function gotData1(data)
-                {
-                   var visits=data.val();
-                   var keys=Object.keys(visits);
-                   var likes1=0;
-                   for(var i=0;i<keys.length;i++)
-                   {
-                       var k=keys[i];
-                      var likes=visits[k].datev;
-                       likes1+=1;
-                       console.log(likes,likes1);
-                       
-                       }
-                       document.getElementById('likes').innerHTML=likes1+" ";
+       //view comments
 
-                }
-                function errData1(err)
-                {
-                    window.alert('error! '+err);
-                }
-
-                var refs1=database.ref('subscr');
-                refs1.on('value',gotData2,errData2);
-                
-
-                function gotData2(data)
-                {
-                   var visits=data.val();
-                   var keys=Object.keys(visits);
-                   var subscr=0;
-                   for(var i=0;i<keys.length;i++)
-                   {
-                       var k=keys[i];
-                      var likes=visits[k].datev;
-                       subscr+=1;
-                       console.log(likes,subscr);
-                       
-                       }
-                       document.getElementById('subscr').innerHTML=subscr+" ";
-
-                }
-                function errData2(err)
-                {
-                    window.alert('error! '+err);
-                }
-                
-
-            //............................update data............
-           /* document.getElementById("update").onclick=function(){
-                Ready();
-                firebase.database().ref('student/'+rollv).update({
-                    NameOfStudent: namev,
-                    Section: secv,
-                    Gender: genv
-                });
-            }*/
-            //............................delete data............
-           /* document.getElementById("delete").onclick=function(){
-                Ready();
-                firebase.database().ref('student/'+rollv).remove();
-            }*/
-            
+          });
+         
+          postsContainer.innerHTML = html;
+        } catch (error) {
+          console.log(error);
+        }
+      })();
+     
         </script>
         <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
         <script defer src="index.js"></script>

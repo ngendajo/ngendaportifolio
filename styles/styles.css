@@ -120,7 +120,7 @@ hr.bar{
     padding: 4px;
     margin: 5px;
 }
-#submit1,#submit2,#submit3{
+#submit1,#submit2,#submit3,.p{
     margin: 5px 30%;
     border: 1px solid white;
     border-radius: 10px;
@@ -175,7 +175,7 @@ hr.bar{
     font-size: 18px;
 }
 .articles{
-    width: 100%;
+    width: 90%;
     margin: 0% 2% 2% 2%;
     padding: 0% 2%  2% 3%;
     display: flex;
@@ -221,9 +221,8 @@ hr.bar{
   
   .comment{
       background-color: white;
-      width: 50%;
       border-radius: 10px;
-      margin: 0% 10% 2% 5%;
+      margin: 0% 1% 1% 1%;
   }
   #visitors{
       color: teal;
@@ -240,11 +239,7 @@ hr.bar{
       top: 13px;
       left: 5px;
   }
-  #subscr{
-      position: relative;
-      top: 13px;
-      left: 20px;
-  }
+ 
   
   .admin{
       width: 100%;
@@ -291,7 +286,7 @@ hr.bar{
     border-radius: 50%;
   }
   #name2,#message2{
-    width: 80%;
+    width: 70%;
     border: 1px solid white;
     border-radius: 10px;
     font-size: 20px;
@@ -327,8 +322,9 @@ hr.bar{
     display: block;
     width: 100%; 
 }
-.admin_view{
- display: flex;
+#actions{
+    display: none;
 }
+
 
   

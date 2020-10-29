@@ -19,7 +19,6 @@
                         <li><a href="index.html">Home</a></li>
                         <li><a href="contactme.html">Contact me</a></li>
                         <li><a href="profile.html">Profile</a></li>
-                        <li><a href="admin.html">Admin</a></li>
                     </ul>
                    
                 </div>
@@ -33,17 +32,20 @@
                 </div>
                 <a id="like"  style="color: darkcyan; text-decoration: none;" href="#"><strong class="like"style="position:relative;top:8px;"></strong> 
                     <i class="fa fa-thumbs-up" style="font-size:36px"></i></a>
-                <h1>comments</h1>
+                
                 <div class="comments-container">
 
                 </div>
                 <div class="addcomments" style="padding-bottom: 3%;margin: auto;">
                     
-                        <textarea id="message" class="comment-input" name="message" style="height:40px;width: 90%;" required placeholder="Leave your comment here"></textarea>
-                        <input type="submit" name="submit" id="submit1" onclick="addComment()" value="Send">
-                    
-                    <a href="profile.html" id="submit1" style="text-decoration: none; margin-top: 1%;">Back to the list</a>
-                    
+                  <form id="adform" method="POST" autocomplete="off">
+                    <input id="name2" type="text" name="arttitle" placeholder="Enter the Title" required><br>
+                    <textarea name="details" id="message2" placeholder="Enter Details" required></textarea>
+                   <center> <input type="submit" name="title1" value="Post" id="submit2">
+                </center>
+
+                </form>
+                </form>
                 </div>
                 
                 
@@ -56,6 +58,7 @@
       const commentsContainer = document.querySelector('.comments-container');
       const subInput = document.querySelector('.email-input');
       const postId = location.href.split('?id=')[1];
+      
 
       (async () => {
         const res = await fetch(
@@ -78,57 +81,7 @@
         document.querySelector('.like').textContent = post.likes;
         postRead.innerHTML = html;
       })();
-      //Add comment
-      var datev1,datev2,datev3,datev4,datev5,datev6,datev7;
-    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            var d = new Date();
-                datev1=d.getFullYear();
-                datev2=months[d.getMonth()];
-                datev3=d.getDate();
-                datev4=d.getHours();
-                datev5=d.getMinutes();
-                datev6=d.getSeconds();
-                datev7=datev1+" "+datev2+" "+datev3+" "+datev4+":"+datev5+":"+datev6;
-                function addComment() {
-        const comment = document.querySelector('.comment-input');
-        const allComments="allComments";
-        comment.value.length > 0 &&
-          (async () => {
-            await fetch(
-              `http://localhost:3000/comments/${postId}/comment`,
-              {
-                method: 'post',
-                headers: { 'content-Type': 'application/json' },
-                body: JSON.stringify({
-                  comment: comment.value,
-                  createdAt: datev7,
-                }),
-              },
-            );
-            await location.reload();
-          })();
-        }
-        //view comments
-        (async () => {
-        const res = await fetch(
-          `http://localhost:3000/comments/${postId}/allComments`,
-        );
-        const comments = await res.json();
-        let html = '';
-        comments.data.forEach((comment) => {
-          html += `
-           <div class="each-comment">
-                  <div class="comment-details">
-                    <p class="comment-time"> ${
-                      comment.createdAt}</p>
-                  </div>
-                  <p class="commentPara">
-                    ${comment.comment}
-                  </p>
-                </div>`;
-        });
-        commentsContainer.innerHTML = html;
-      })();
+      
 
       //likes
       const like = document.querySelector('#like');
@@ -141,9 +94,33 @@
             headers: { 'content-Type': 'application/json' },
           },
         );
-        location.reload();
+      });
+      CKEDITOR.replace('details');
+      const postForm = document.querySelector('#adform');
+      postForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        try {
+          const fd = new FormData();
+          fd.append('title', postForm.arttitle.value);
+          fd.append('body', CKEDITOR.instances.details.getData());
+          const res = await fetch(
+            `https://http://localhost:3000/upost/${postId}`,
+            {
+              method: 'PATCH',
+              headers: {},
+              body: fd,
+            },
+          );
+          const post = await res.json();
+          console.log(post);
+
+          // location.href = 'admin.html';
+        } catch (error) {
+          console.log(error);
+        }
       });
         </script>
+        <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
         <script src="admin.js"></script>
     </body>
 </html>

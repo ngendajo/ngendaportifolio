@@ -71,3 +71,32 @@ adminform.addEventListener('submit',async(e)=>{
         console.log(error);
       }
         })
+        document.getElementById("comm").onclick=function(){
+          const allComments="allComments";
+          window.alert(allComments);
+         const commentsContainer = document.querySelector('.comments-container');
+         let ht='';
+         (async () => {
+          const res = await fetch(
+            `http://localhost:3000/comments/${postId}/allComments`,
+          );
+          const comments = await res.json();
+          console.log(comments);
+          
+          
+          
+          comments.data.forEach((comment) => {
+              ht += `
+             <div class="each-comment">
+                    <div class="comment-details">
+                      <p class="comment-time"> ${
+                        comment.createdAt}</p>
+                    </div>
+                    <p class="commentPara">
+                      ${comment.comment}
+                    </p>
+                  </div>`;
+          });
+          commentsContainer.innerHTML=ht;
+        })();
+              }
