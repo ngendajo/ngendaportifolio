@@ -59,7 +59,7 @@ adminform.addEventListener('submit',async(e)=>{
         },
         body:JSON.stringify(fd)
       };
-        const r=await fetch('http://localhost:3000/post',options);
+        const r=await fetch('https://ngendajo.herokuapp.com/post',options);
         const p = await r.json();
                 console.log(p);
       
@@ -78,7 +78,7 @@ adminform.addEventListener('submit',async(e)=>{
          let ht='';
          (async () => {
           const res = await fetch(
-            `http://localhost:3000/comments/${postId}/allComments`,
+            `https://ngendajo.herokuapp.com/comments/${postId}/allComments`,
           );
           const comments = await res.json();
           console.log(comments);

@@ -30,7 +30,7 @@
                 <div class="post-read">
 
                 </div>
-                <a id="like"  style="color: darkcyan; text-decoration: none;" href="#"><strong class="like"style="position:relative;top:8px;"></strong> 
+                <a id="like"  style="color: darkcyan; text-decoration: none; padding-bottom: 10px;" href="#"><strong class="like"style="position:relative;top:8px;"></strong> 
                     <i class="fa fa-thumbs-up" style="font-size:36px"></i></a>
                 
                 <div class="addcomments" style="padding-bottom: 3%;margin: auto;">
@@ -51,7 +51,7 @@
 
       (async () => {
         const res = await fetch(
-          `http://localhost:3000/post1/${postId}`,
+          `https://ngendajo.herokuapp.com/post1/${postId}`,
         );
         const postData = await res.json();
         const post = postData.data;
@@ -77,7 +77,7 @@
          confirmation &&
           (async () => {
             await fetch(
-              `http://localhost:3000/dpost/${postId}`,
+              `https://ngendajo.herokuapp.com/dpost/${postId}`,
               {
                 method: 'delete',
                 headers: { 'content-Type': 'application/json' },
@@ -93,7 +93,7 @@
 
       like.addEventListener('click', async () => {
         await fetch(
-          `http://localhost:3000/like/${postId}`,
+          `https://ngendajo.herokuapp.com/like/${postId}`,
           {
             method: 'put',
             headers: { 'content-Type': 'application/json' },
