@@ -63,7 +63,7 @@
             (async () => {
         try {
           const res = await fetch(
-            'https://localhost:3000/posts',
+            'https://ngendajo.herokuapp.com/posts',
             {
               method: 'GET',
               headers: { 'content-Type': 'application/json' },
@@ -72,7 +72,7 @@
           const fetchedPosts = await res.json();
           const posts = fetchedPosts.data;
           console.log('posts:', posts);
-          let html = '';
+          let html = ''
           await posts.forEach((post) => {
             console.log(post);
             html += ` <div class="post-card">
